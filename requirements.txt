@@ -1,0 +1,4 @@
+pillow
+django
+face-recognition
+dlib
