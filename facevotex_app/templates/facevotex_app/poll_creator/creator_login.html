@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Page</title>
+
+<style>
+
+body{
+    background-color:#f2f2f2;
+    font-family:Arial, sans-serif;
+}
+
+.login-container{
+    width:300px;
+    margin:100px auto;
+    padding:20px;
+    background:white;
+    border:1px solid #ccc;
+}
+
+h2{
+    text-align:center;
+}
+
+label{
+    font-weight:bold;
+}
+
+input[type="text"],
+input[type="password"]{
+    width:95%;
+    padding:8px;
+    margin-top:5px;
+    border:1px solid #aaa;
+}
+
+input[type="submit"]{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#007BFF;
+    color:white;
+    border:none;
+}
+
+input[type="submit"]:hover{
+    background:#0056b3;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+ {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+
+
+<div class="login-container">
+
+<h2>Login</h2>
+
+<form action="/c_login/" method="POST">
+  {% csrf_token %}
+
+<label>email</label><br>
+<input type="text" name="email" required><br><br>
+
+<label>Password</label><br>
+<input type="password" name="password" required><br><br>
+
+<input type="submit" value="Login">
+
+</form>
+
+</div>
+
+</body>
+</html>

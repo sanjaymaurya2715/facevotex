@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Poll</title>
+
+<style>
+
+body{
+    background:#f4f6fb;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Main Container */
+
+.container{
+    width:450px;
+    margin:60px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0px 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Title */
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
+
+/* Labels */
+
+label{
+    font-weight:bold;
+    font-size:14px;
+    color:#444;
+}
+
+/* Inputs */
+
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    margin-bottom:18px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+/* Focus animation */
+
+input:focus, textarea:focus, select:focus{
+    border-color:#4a7cff;
+    outline:none;
+    box-shadow:0 0 5px rgba(74,124,255,0.3);
+}
+
+/* Textarea */
+
+textarea{
+    resize:none;
+    height:80px;
+}
+
+/* Button */
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#4a7cff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* Hover effect */
+
+button:hover{
+    background:#2f5ce0;
+}
+
+/* Small animation */
+
+.container:hover{
+    transform:scale(1.01);
+    transition:0.3s;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+ {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+
+
+<div class="container">
+
+<h2>Create Poll</h2>
+
+<form method="POST" action="/create_poll/">
+   {% csrf_token %} 
+
+
+
+<label>Poll Title</label>
+<input type="text" name="tittle" placeholder="Enter poll title" required>
+
+<label>Description</label>
+<textarea name="description" placeholder="Write poll description"></textarea>
+
+<label>Start Date</label>
+<input type="date" name="start_date" required>
+
+<label>End Date</label>
+<input type="date" name="end_date" required>
+
+<label>Poll Type</label>
+<select name="poll_type">
+<option value="public">Public</option>
+<option value="private">Private</option>
+<option value="anonymous">Anonymous</option>
+</select>
+
+<button type="submit">Create Poll</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

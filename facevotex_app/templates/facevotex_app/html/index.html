@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%include 'facevotex_app/common_html/common_css.html'%}
+<meta charset="UTF-8">
+<title>VoteX - Smart Voting System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* floating blobs */
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    filter:blur(80px);
+    animation: float 8s infinite ease-in-out;
+}
+
+body::before{
+    top:-150px;
+    left:-150px;
+}
+
+body::after{
+    bottom:-150px;
+    right:-150px;
+    animation-delay:4s;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(40px);}
+}
+
+.container{
+    text-align:center;
+    max-width:900px;
+    padding:40px;
+    z-index:2;
+}
+
+/* title */
+.title{
+    font-size:56px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:15px;
+    background:linear-gradient(90deg,#00f5ff,#00ff88);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+/* subtitle */
+.subtitle{
+    font-size:20px;
+    opacity:0.9;
+    margin-bottom:40px;
+}
+
+/* cards */
+.card-wrapper{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    padding:30px;
+    width:240px;
+    border-radius:20px;
+    transition:0.35s;
+    cursor:pointer;
+    border:1px solid rgba(255,255,255,0.15);
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+    background:rgba(255,255,255,0.15);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.card p{
+    font-size:14px;
+    opacity:0.85;
+}
+
+/* button */
+.main-btn{
+    margin-top:45px;
+    padding:14px 40px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(90deg,#00f5ff,#00ff88);
+    color:#003;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.main-btn:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 25px rgba(0,255,200,0.5);
+}
+
+/* footer text */
+.footer{
+    margin-top:25px;
+    font-size:13px;
+    opacity:0.7;
+}
+
+/* responsive */
+@media(max-width:600px){
+    .title{font-size:38px;}
+    .subtitle{font-size:16px;}
+}
+</style>
+</head>
+
+<body>
+    
+    {%include 'facevotex_app/common_html/navbar.html'%}
+
+<div class="container">
+
+    <div class="title">VoteX</div>
+    <div class="subtitle">
+        Secure • Smart • AI Powered Voting System
+    </div>
+
+    <div class="card-wrapper">
+
+        <div class="card">
+            <h3>🗳️ Cast Vote</h3>
+            <p>Quickly participate in active elections with full security.</p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Live Results</h3>
+            <p>Watch real-time transparent vote counting.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔐 Face Verification</h3>
+            <p>AI-powered identity verification for fraud prevention.</p>
+        </div>
+
+    </div>
+
+    <button class="main-btn" onclick="location.href='login'">
+        Start Voting
+    </button>
+
+    <div class="footer">
+        © 2026 VoteX Smart Election System
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </div>
+
+</div>
+
+</body>
+</html>

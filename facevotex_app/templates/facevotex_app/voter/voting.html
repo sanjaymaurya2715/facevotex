@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+ {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+  
+
+<h3>{{ poll.name }}</h3>
+
+<form method="post" enctype="multipart/form-data" class="card p-4">
+{% csrf_token %}
+
+{% for c in candidates %}
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="candidate" value="{{c.poll}}" required>
+  <img src="{{ c.icon.url }}" width="50">
+  {{ c.name }}
+</div>
+{% endfor %}
+
+<hr>
+
+<video id="video" width="320" height="240" autoplay></video>
+<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+<input type="file" name="face" id="faceInput" hidden>
+
+<button type="button" onclick="capture()" class="btn btn-warning mt-2">
+Capture Face
+</button>
+
+<button class="btn btn-success mt-2">
+Submit Vote
+</button>
+
+</form>
+
+<script>
+navigator.mediaDevices.getUserMedia({video:true})
+.then(s=>video.srcObject=s);
+
+function capture(){
+  let c=document.getElementById('canvas');
+  c.getContext('2d').drawImage(video,0,0,320,240);
+  c.toBlob(b=>{
+    let f=new File([b],"face.png",{type:"image/png"});
+    let d=new DataTransfer();
+    d.items.add(f);
+    document.getElementById('faceInput').files=d.files;
+    alert("Face Captured");
+  });
+}
+</script>
+
+</div></body></html>

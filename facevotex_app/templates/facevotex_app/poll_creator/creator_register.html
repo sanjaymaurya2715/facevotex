@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poll Creator Registration</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body{
+        height:100vh;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .container{
+        width:420px;
+        background:#ffffff;
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    .container h2{
+        text-align:center;
+        margin-bottom:20px;
+        color:#2c5364;
+    }
+
+    .input-group{
+        margin-bottom:15px;
+    }
+
+    label{
+        font-size:14px;
+        font-weight:600;
+        color:#333;
+        display:block;
+        margin-bottom:5px;
+    }
+
+    input, select, textarea{
+        width:100%;
+        padding:10px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        outline:none;
+        transition:0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus{
+        border-color:#2c5364;
+        box-shadow:0 0 5px rgba(44,83,100,0.4);
+    }
+
+    textarea{
+        resize:none;
+        height:70px;
+    }
+
+    .checkbox{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        font-size:13px;
+        margin:10px 0 18px;
+    }
+
+    button{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        background:#2c5364;
+        color:white;
+        font-size:16px;
+        font-weight:bold;
+        cursor:pointer;
+        transition:0.3s;
+    }
+
+    button:hover{
+        background:#203a43;
+        transform:translateY(-1px);
+    }
+
+    .footer{
+        text-align:center;
+        margin-top:12px;
+        font-size:13px;
+    }
+
+    .footer a{
+        color:#2c5364;
+        text-decoration:none;
+        font-weight:600;
+    }
+</style>
+</head>
+
+<body>
+
+ {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+
+
+<div class="container">
+    <h2>Poll Creator Register</h2>
+
+   <form method="POST" action="/creator_register/"enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Enter your full name" required>
+    </div>
+
+    <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Create password" required>
+    </div>
+
+    <div class="input-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" placeholder="Enter phone number" required>
+    </div>
+
+    <div class="input-group">
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Organization Name</label>
+        <input type="text" name="organization_name" placeholder="Your company / organization">
+    </div>
+
+    <div class="input-group">
+        <label>Profile Picture</label>
+        <input type="file" name="profile_picture" accept="image/*">
+
+    </div>
+
+    <div class="input-group">
+        <label>City</label>
+        <input type="text" name="city" placeholder="Your company / organization">
+    </div>
+
+
+    <div class="input-group">
+        <label>Address</label>
+        <textarea name="address" placeholder="Enter your address"></textarea>
+    </div>
+
+    <div class="checkbox">
+        <input type="checkbox" name="terms_accepted" required>
+        <span>I agree to Terms & Conditions</span>
+    </div>
+
+    <button type="submit">Register</button>
+</form>
+    <div class="footer">
+        Already registered? <a href="#">Login</a>
+    </div>
+</div>
+
+</body>
+</html>

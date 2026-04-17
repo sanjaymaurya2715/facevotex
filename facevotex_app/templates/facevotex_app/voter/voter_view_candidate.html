@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Candidates</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 20px;
+}
+
+.candidate-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.candidate-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.age {
+    font-size: 14px;
+    color: #666;
+}
+
+.vote-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #27ae60;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.vote-btn:hover {
+    background: #219150;
+}
+</style>
+</head>
+
+<body>
+
+ {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+
+
+<header>View Candidates</header>
+
+<div class="container">
+
+{% for c in info %}
+<div class="candidate-card">
+    <div class="left">
+        <img src="{{ c.profile_pic.url }}" class="candidate-img">
+        <div>
+            <div class="name">{{ c.candidate_name }}</div>
+            <div class="age">Age: {{ c.age }}</div>
+        </div>
+    </div>
+    <div>
+    <button class="vote-btn"><a href="/voting/{{c.id}}">Vote</a></button>
+    </div>    
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

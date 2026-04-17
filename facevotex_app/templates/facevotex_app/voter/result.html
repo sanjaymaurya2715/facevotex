@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Result</title>
+    {% include 'facevotex_app/common_html/common_css.html' %}
+    <style>
+        body { background: #f4f7fc; }
+        .result-card { border: none; border-radius: 1rem; overflow: hidden; }
+        .result-card .card-header { background: linear-gradient(135deg, #2d9cdb, #2f80ed); }
+        .result-card .profile-image { max-width: 160px; border-radius: 1rem; object-fit: cover; }
+        .result-card .candidate-info dt { width: 120px; }
+        .result-card .candidate-info dd { margin-left: 0; }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card result-card shadow-sm">
+                    <div class="card-header text-white py-4">
+                        <h2 class="mb-1">Vote Submitted</h2>
+                        <p class="mb-0">Thank you for voting. Your choice has been recorded.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        {% if message %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endif %}
+
+                        {% if candidate %}
+                        <div class="row g-4">
+                            <div class="col-md-4 text-center">
+                                <img src="{{ candidate.profile_pic.url }}" alt="{{ candidate.candidate_name }}" class="img-fluid profile-image shadow-sm">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="fw-bold mb-3">{{ candidate.candidate_name }}</h3>
+                                <p class="mb-2 text-muted"><strong>Poll:</strong> {{ poll.tittle }}</p>
+                                <dl class="row candidate-info">
+                                    <dt class="col-sm-4">Email</dt>
+                                    <dd class="col-sm-8">{{ candidate.mail }}</dd>
+                                    <dt class="col-sm-4">Phone</dt>
+                                    <dd class="col-sm-8">{{ candidate.phone }}</dd>
+                                    <dt class="col-sm-4">Age</dt>
+                                    <dd class="col-sm-8">{{ candidate.age }}</dd>
+                                    <dt class="col-sm-4">Gender</dt>
+                                    <dd class="col-sm-8">{{ candidate.gender }}</dd>
+                                    <dt class="col-sm-4">Total Votes</dt>
+                                    <dd class="col-sm-8">{{ candidate.votes }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+                            <a href="{% url 'voter_home' %}" class="btn btn-outline-primary w-100">Back to Dashboard</a>
+                            <a href="{% url 'voter_view_poll' %}" class="btn btn-success w-100">Browse Polls</a>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-warning" role="alert">
+                            We could not locate the candidate details for your vote. Please try again or contact support.
+                        </div>
+                        <a href="{% url 'voter_view_poll' %}" class="btn btn-primary">View Polls</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

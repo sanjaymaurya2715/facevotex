@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 380px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+        }
+
+        .file-input {
+            padding: 6px;
+            border: 1px dashed #aaa;
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+   {% if messages %}
+    {% for msg in messages %}
+      <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto text-center" role="alert">
+        <strong>{{ msg }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}   
+
+<div class="container">
+    <h2>Registration Form</h2>
+
+    <form method="post" action="/voter_registation/" enctype="multipart/form-data" class="needs-validation">
+      {% csrf_token %} 
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required minlength="6">
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" required pattern="[0-9]{10}">
+        </div>
+
+        <!-- Gender -->
+        <label>Gender</label>
+        <div class="radio-group">
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="other" required> Other</label>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" required>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label>Address</label>
+            <textarea name="address" required></textarea>
+        </div>
+
+        
+
+        <!-- Profile Image -->
+        <div class="form-group">
+            <label>Upload Profile Image</label>
+            <input type="file" name="profile_image" accept="image/*" required class="file-input">
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+    </form>
+</div>
+
+</body>
+</html>

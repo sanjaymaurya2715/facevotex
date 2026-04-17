@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Camera</title>
+</head>
+<body>
+
+<h2>Camera Live Feed</h2>
+
+<video id="video" width="400" height="300" autoplay playsinline></video>
+
+<script>
+    const video = document.getElementById('video');
+
+    // Open camera
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(error => {
+            console.log("Camera access denied or error:", error);
+        });
+</script>
+
+</body>
+</html>
